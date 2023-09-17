@@ -13,5 +13,5 @@ mongoose.connection
 
 module.exports = {
     PokeCard: require('./PokeCards').PokeCard,
-    User: require('./PokeCards').User
+    Collection: require('./PokeCards').Collection
 }

@@ -42,18 +42,16 @@ const pokeCardsSchema = new mongoose.Schema({
     trainerType: String //Item, Supporter, Tool, Stadium
 })
 
-const userSchema = new mongoose.Schema({
-    username: {type: String, required: true},
-    password: {type: String, required: true},
-    collections: [{
-        name: String,
-        cards: [pokeCardsSchema]
-    }],
+const collectionSchema = new mongoose.Schema({
+    name: {type: String, default: String, required: true}, //name of collection
+    description: String, //description of collection
+    img: String, //Cover image of collection
+    cards: [pokeCardsSchema], //Cards in collection
     //favoriteCards: [pokeCardsSchema]
 })
 
 
 const PokeCard = mongoose.model("PokeCard", pokeCardsSchema)
-const User = mongoose.model("User", userSchema)
+const Collection = mongoose.model("User", collectionSchema)
 
-module.exports = {PokeCard, User}
+module.exports = {PokeCard, Collection}
