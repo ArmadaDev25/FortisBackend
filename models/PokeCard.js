@@ -52,6 +52,6 @@ const collectionSchema = new mongoose.Schema({
 
 
 const PokeCard = mongoose.model("PokeCard", pokeCardsSchema)
-const Collection = mongoose.model("User", collectionSchema)
+const Collection = mongoose.model("Collection", collectionSchema)
 
 module.exports = {PokeCard, Collection}
