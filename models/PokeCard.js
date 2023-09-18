@@ -46,7 +46,7 @@ const collectionSchema = new mongoose.Schema({
     name: {type: String, default: String, required: true}, //name of collection
     description: String, //description of collection
     img: String, //Cover image of collection
-    cards: [pokeCardsSchema], //Cards in collection
+    cards: {type: [pokeCardsSchema], default:[]}, //Cards in collection
     //favoriteCards: [pokeCardsSchema]
 })
 
