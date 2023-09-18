@@ -1,7 +1,29 @@
 const db = require('../models')
 
-const getCollection = (req, res) => {
-    
+const getCollection = async (req, res) => {
+    try{
+        const foundCollection = await db.Collection.findById(req.params.id)
+        if(!foundCollection){
+            res.status(404).json({message: 'Cannot find Collection'})
+        }else{
+            res.status(200).json({data: foundCollection})
+        }
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
+}
+
+const getCollections = async (req, res) => {
+    try{
+        const foundCollections = await db.Collection.find({})
+        if(!foundCollection){
+            res.status(404).json({message: 'Cannot find Collection'})
+        }else{
+            res.status(200).json({data: foundCollections})
+        }
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
 }
 
 const createCollection = async (req, res) => {
@@ -29,6 +51,7 @@ const deleteCollection = (req, res) => {
 
 module.exports = {
     getCollection,
+    getCollections,
     createCollection,
     updateCollection,
     deleteCollection
