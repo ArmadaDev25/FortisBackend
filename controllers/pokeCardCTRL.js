@@ -13,8 +13,8 @@ const createPokeCard = async (req, res) => {
         newCard.category = foundCard.category
         newCard.setLogo = `${foundCard.set.logo}.png`
         newCard.image = `${foundCard.image}/high.png`
-        newCard.id = `${foundCard.localId}/${foundCard.set.cardCount.official}`
-        newCard.illustrator = foundCard.illustrator
+        newCard.localId = `${foundCard.localId}/${foundCard.set.cardCount.official}`
+        foundCard.illustrator ? newCard.illustrator = foundCard.illustrator : newCard.illustrator = "TBD"
         newCard.rarity = foundCard.rarity
         
         if(newCard.category === 'Pokemon'){
@@ -44,6 +44,7 @@ const createPokeCard = async (req, res) => {
                         move.cost.push(c)
                     })
                     move.effect = attack.effect
+                    newCard.moves.push(move)
                 })
             }
 
@@ -53,10 +54,6 @@ const createPokeCard = async (req, res) => {
             newCard.hp = foundCard.hp
 
         } else if(newCard.category === 'Energy'){
-            newCard.typing = []
-            foundCard.types.forEach((type) => {
-                newCard.typing.push(type)
-            })
             newCard.energyType = foundCard.energyType
             newCard.effect = foundCard.effect
 
@@ -78,6 +75,7 @@ const createPokeCard = async (req, res) => {
             console.log(foundCollection)
             console.log(createdPokeCard, "This is line 79")
             if(foundCollection){
+                console.log(foundCollection.cards, createdPokeCard, "This is line 82")
                 foundCollection.cards.push(createdPokeCard)
                 await foundCollection.save()
             }else{

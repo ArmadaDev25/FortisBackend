@@ -6,7 +6,7 @@ const pokeCardsSchema = new mongoose.Schema({
     setLogo: {type: String, required: true}, //must put .png after logo
     image: {type:String, required: true}, //must put /high.png 
     isFavorite: {type: Boolean, default: false}, //for favorites carosel
-    id: {type: String, required: true}, //cardNum/setOriginalNum
+    localId: {type: String, required: true}, //cardNum/setOriginalNum
     illustrator: {type: String, required: true}, //illustrator of card
     rarity: {type: String, required: true}, //Common,Uncommon, ect
 
@@ -46,7 +46,7 @@ const collectionSchema = new mongoose.Schema({
     name: {type: String, default: String, required: true}, //name of collection
     description: String, //description of collection
     img: String, //Cover image of collection
-    cards: {type: [pokeCardsSchema], default:[]}, //Cards in collection
+    cards: [pokeCardsSchema], //Cards in collection
     //favoriteCards: [pokeCardsSchema]
 })
 
