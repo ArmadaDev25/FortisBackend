@@ -1,8 +1,16 @@
-const e = require('express')
 const db = require('../models')
 
-const getPokeCard = (req, res) => {
-
+const getPokeCard = async (req, res) => {
+    try{
+        const foundPokeCard = await db.PokeCard.findById(req.params.pokeCardID)
+        if(!foundPokeCard){
+            res.status(404).json({message: 'Cannot find PokeCard'})
+        }else{
+            res.status(200).json({data: foundPokeCard})
+        }
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
 }
 
 const createPokeCard = async (req, res) => {

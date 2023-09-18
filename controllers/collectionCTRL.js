@@ -2,7 +2,7 @@ const db = require('../models')
 
 const getCollection = async (req, res) => {
     try{
-        const foundCollection = await db.Collection.findById(req.params.id)
+        const foundCollection = await db.Collection.findById(req.params.collectionID)
         if(!foundCollection){
             res.status(404).json({message: 'Cannot find Collection'})
         }else{
