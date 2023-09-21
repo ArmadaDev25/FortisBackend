@@ -100,8 +100,21 @@ const updatePokeCard = (req, res) => {
 
 }
 
-const deletePokeCard = (req, res) => {
+const deletePokeCard = async (req, res) => {
+    try{
+        const foundCollection = await db.Collection.findById(req.params.collectionID)
+        const pokeCard = foundCollection.cards.id(req.params.pokeCardID).deleteOne()
+        const deletedPokeCard = await db.PokeCard.findByIdAndDelete(req.params.pokeCardID)
+        foundCollection.save()
+        if(!deletedPokeCard){
+            res.status(400).json({message: 'Could not delete PokeCard'})
+        } else {
+            res.status(200).json({Data: deletedPokeCard, message: "PokeCard deleted"})
+        }
 
+    }catch (err){
+        res.status(400).json({error: err.message})
+    }
 }
 
 module.exports = {

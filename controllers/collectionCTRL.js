@@ -15,8 +15,8 @@ const getCollection = async (req, res) => {
 
 const getCollections = async (req, res) => {
     try{
-        const foundCollections = await db.Collection.find({})
-        if(!foundCollection){
+        const foundCollections = await db.Collection.find()
+        if(!foundCollections){
             res.status(404).json({message: 'Cannot find Collection'})
         }else{
             res.status(200).json({data: foundCollections})
