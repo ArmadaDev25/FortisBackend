@@ -12,6 +12,6 @@ mongoose.connection
     .on('error', (error) => console.log(error))
 
 module.exports = {
-    PokeCard: require('./PokeCards').PokeCard,
-    Collection: require('./PokeCards').Collection
+    PokeCard: require('./PokeCard').PokeCard,
+    Collection: require('./PokeCard').Collection
 }
