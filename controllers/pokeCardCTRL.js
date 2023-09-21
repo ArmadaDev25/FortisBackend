@@ -57,7 +57,7 @@ const createPokeCard = async (req, res) => {
             }
 
             foundCard.weaknesses ? newCard.weakness = `${foundCard.weaknesses[0].type} ${foundCard.weaknesses[0].value}` : newCard.weakness = "None"
-            foundCard.resistances ? newCard.resistances = foundCard.resistances : newCard.resistances = "None"
+            foundCard.resistances ? newCard.resistances = `${foundCard.resistances[0].type} ${foundCard.resistances[0].value}` : newCard.resistances = "None"
             newCard.retreat = foundCard.retreat
             newCard.hp = foundCard.hp
 
@@ -109,7 +109,7 @@ const deletePokeCard = async (req, res) => {
         if(!deletedPokeCard){
             res.status(400).json({message: 'Could not delete PokeCard'})
         } else {
-            res.status(200).json({Data: deletedPokeCard, message: "PokeCard deleted"})
+            res.status(200).json({data: deletedPokeCard, message: "PokeCard deleted"})
         }
 
     }catch (err){

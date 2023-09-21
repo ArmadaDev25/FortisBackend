@@ -45,8 +45,21 @@ const updateCollection = (req, res) => {
 
 }
 
-const deleteCollection = (req, res) => {
+const deleteCollection = async (req, res) => {
+    try{
+        const foundCollection = await db.Collection.findByIdAndDelete(req.params.collectionID)
+        if(!foundCollection){
+            res.status(400).json({message: "Could not delete Collection"})
+        }else{
+            foundCollection.cards.forEach(async (card) => {
+                await db.PokeCard.findByIdAndDelete(card._id)
+            })
 
+            res.status(200).json({data: foundCollection, message: "Collection deleted"})
+        }
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
 }
 
 module.exports = {
