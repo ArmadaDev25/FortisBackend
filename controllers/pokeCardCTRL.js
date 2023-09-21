@@ -100,8 +100,21 @@ const createPokeCard = async (req, res) => {
     }
 }
 
-const updatePokeCard = (req, res) => {
-
+const updatePokeCard = async (req, res) => {
+    try{
+        const updatedPokeCard = await db.PokeCard.findByIdAndUpdate(req.params.pokeCardID, req.body, {new: true})
+        if(!updatedPokeCard){
+            res.status(400).json({message: "Cannot update Poke Card"})
+        }else{
+            const foundCollection = await db.Collection.findById(req.params.collectionID)
+            const pokeCard = foundCollection.cards.id(req.params.pokeCardID)
+            foundCollection.cards.splice(foundCollection.cards.indexOf(pokeCard), 1, updatedPokeCard)
+            foundCollection.save()
+            res.status(200).json({data:updatedPokeCard, message:"Poke Card updated"})
+        }
+    }catch(err){
+        res.status(400).json({error: err.message })
+    }
 }
 
 const deletePokeCard = async (req, res) => {
