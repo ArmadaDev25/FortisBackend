@@ -34,12 +34,16 @@ const createPokeCard = async (req, res) => {
             foundCard.stage ? newCard.stage = foundCard.stage : newCard.stage = "Basic"
 
             if(foundCard.abilities){
-                newCard.ability = {}
-                newCard.ability.type = foundCard.abilities[0].type
-                newCard.ability.name = foundCard.abilities[0].name
-                newCard.ability.effect = foundCard.abilities[0].effect
-            }
+                newCard.abilities = []
+                foundCard.abilities.forEach((ability) => {
+                    const abil = {}
+                    abil.aType = ability.type
+                    abil.name = ability.name
+                    abil.effect = ability.effect
 
+                    newCard.abilities.push(abil)
+                })
+            }
             if(foundCard.attacks){
                 newCard.moves = []
                 foundCard.attacks.forEach((attack) => {

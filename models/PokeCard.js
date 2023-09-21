@@ -16,11 +16,11 @@ const pokeCardsSchema = new mongoose.Schema({
     //Pokemon Cards
     evolveFrom: String, //Pokemon it evolves from
     stage: String, //basic stage1 or stage2
-    ability: {
-        type: String, //Pokebody, Pokepower etc..
+    abilities: [{
+        aType: String, //Pokebody, Pokepower etc..
         name: String, //ability name
         effect: String //effect of ability
-    },
+    }],
     moves: [{
         name: String, //move name 
         damage: Number, //damage
