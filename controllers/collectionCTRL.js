@@ -41,8 +41,17 @@ const createCollection = async (req, res) => {
     }
 }
 
-const updateCollection = (req, res) => {
-
+const updateCollection = async (req, res) => {
+    try{
+        const updatedCollection = await db.Collection.findByIdAndUpdate(req.params.collectionID, req.body, {new: true})
+        if(!updatedCollection){
+            res.status(400).json({message: "Cannot update Collection"})
+        }else{
+            res.status(200).json({data:updatedCollection, message:"Collection updated"})
+        }
+    }catch(err){
+        res.status(400).json({error: err.message })
+    }
 }
 
 const deleteCollection = async (req, res) => {
