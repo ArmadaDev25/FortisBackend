@@ -60,8 +60,8 @@ const createPokeCard = async (req, res) => {
                 })
             }
 
-            foundCard.weaknesses ? newCard.weakness = `${foundCard.weaknesses[0].type} ${foundCard.weaknesses[0].value}` : newCard.weakness = "None"
-            foundCard.resistances ? newCard.resistances = `${foundCard.resistances[0].type} ${foundCard.resistances[0].value}` : newCard.resistances = "None"
+            foundCard.weaknesses ? newCard.weakness = `${foundCard.weaknesses[0].type} ${foundCard.weaknesses[0].value}` : null
+            foundCard.resistances ? newCard.resistances = `${foundCard.resistances[0].type} ${foundCard.resistances[0].value}` : null
             newCard.retreat = foundCard.retreat
             newCard.hp = foundCard.hp
 
