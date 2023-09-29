@@ -23,7 +23,7 @@ const pokeCardsSchema = new mongoose.Schema({
     }],
     moves: [{
         name: String, //move name 
-        damage: Number, //damage
+        damage: String, //damage
         cost: [String], //cost of move
         effect: String //effect of move
     }],
