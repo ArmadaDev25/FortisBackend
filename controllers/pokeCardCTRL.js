@@ -15,7 +15,8 @@ const getPokeCard = async (req, res) => {
 
 const createPokeCard = async (req, res) => {
     try{
-        const createdPokeCard = await db.PokeCard.create(req.body)
+        //console.log(req.body.cardData)
+        const createdPokeCard = await db.PokeCard.create(req.body.cardData)
         const foundCollection = await db.Collection.findById(req.params.collectionID)
         
         console.log(createdPokeCard)
