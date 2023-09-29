@@ -27,8 +27,14 @@ const pokeCardsSchema = new mongoose.Schema({
         cost: [String], //cost of move
         effect: String //effect of move
     }],
-    weakness: String,
-    resistances: String,
+    weaknesses: [{
+        wType: String,
+        value: String
+    }],
+    resistances: [{
+        rType: String,
+        value: String
+    }],
     retreat: Number,
     hp: Number,
 
